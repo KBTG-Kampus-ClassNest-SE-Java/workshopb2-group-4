@@ -57,6 +57,21 @@ public class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("should return all product with specific page and limit")
+    public void shouldReturnAllProductFilterPageAndLimit() throws Exception {
+        // Given
+        int page = 2;
+        int limit = 1;
+        // When & Then
+        when(productService.getAll(page,limit)).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(get("/api/v1/products?page=2&limit=1").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        verify(productService, times(1)).getAll(page,limit);
+    }
+
+    @Test
     @DisplayName("should return product")
     public void shouldReturnProduct() throws Exception {
         // Given

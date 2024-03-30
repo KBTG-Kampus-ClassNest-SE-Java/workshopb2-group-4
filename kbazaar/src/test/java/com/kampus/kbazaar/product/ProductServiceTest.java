@@ -15,6 +15,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 class ProductServiceTest {
 
@@ -52,6 +56,41 @@ class ProductServiceTest {
         assertEquals(2, result.size());
         assertEquals("Google Pixel 5", result.get(0).name());
         assertEquals("BEV-COCA-COLA", result.get(1).sku());
+    }
+
+    @Test
+    @DisplayName("should be able to get product at first index when input page = 2 and limit = 1")
+    void shouldBeAbleToGetSecondProductWhenInputPageTwoAndLimitOne() {
+        // Mock data
+        Product product1 =
+                new Product(
+                        1L,
+                        "Google Pixel 5",
+                        "MOBILE-GOOGLE-PIXEL-5",
+                        new BigDecimal(12990.75),
+                        100);
+        Product product2 =
+                new Product(
+                        2L,
+                        "Coca-Cola",
+                        "BEV-COCA-COLA",
+                         new BigDecimal(20.75),
+                        150);
+        List<Product> productList = Arrays.asList(product1, product2);
+
+        // Mock repository method
+        Pageable pageable = PageRequest.of(1,1);
+        Page<Product> expectedProduct = new PageImpl<>(List.of(product2),pageable,1);
+        when(productRepository.findAll(pageable)).thenReturn(expectedProduct);
+
+        // Call service method
+        int page = 2;
+        int limit = 1;
+        List<ProductResponse> result = productService.getAll(page,limit);
+
+        // Assertions
+        assertEquals(1, result.size());
+        assertEquals("Coca-Cola", result.get(0).name());
     }
 
     @Test
