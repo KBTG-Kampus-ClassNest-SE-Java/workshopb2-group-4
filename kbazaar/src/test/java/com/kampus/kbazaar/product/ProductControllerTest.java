@@ -68,7 +68,7 @@ public class ProductControllerTest {
         mockMvc.perform(get("/api/v1/products?page=2&limit=1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(productService, times(1)).getAll(page,2);
+        verify(productService, times(1)).getAll(page,limit);
     }
 
     @Test
