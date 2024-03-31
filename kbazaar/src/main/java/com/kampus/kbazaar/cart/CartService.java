@@ -4,6 +4,7 @@ import com.kampus.kbazaar.cartItem.CartItemService;
 import com.kampus.kbazaar.exceptions.NotFoundException;
 import com.kampus.kbazaar.cartItem.CartItem;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class CartService {
         return cartResponseList;
     }
 
+    @Transactional
     public CartResponse addToCart(String username, CartRequest request) {
         Cart cart = cartRepository.findByUsername(username);
         CartItem item = new CartItem();
