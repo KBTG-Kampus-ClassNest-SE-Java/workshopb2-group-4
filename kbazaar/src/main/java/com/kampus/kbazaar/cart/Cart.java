@@ -41,7 +41,7 @@ public class Cart {
     private BigDecimal grandTotal;
 
     // Define CartItem relationship
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "username", cascade = CascadeType.ALL)
     private List<CartItem> items;
 
     public List<CartItem> getItems() {
