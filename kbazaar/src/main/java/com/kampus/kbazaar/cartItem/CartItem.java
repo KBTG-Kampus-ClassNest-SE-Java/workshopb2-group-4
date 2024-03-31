@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.function.BiFunction;
 
 @Data
 @NoArgsConstructor
@@ -31,7 +32,7 @@ public class CartItem {
     private BigDecimal price;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private BigDecimal quantity;
 
     @Column(name = "discount")
     private BigDecimal discount;
@@ -79,11 +80,11 @@ public class CartItem {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
