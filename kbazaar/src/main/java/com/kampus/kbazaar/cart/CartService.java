@@ -1,26 +1,26 @@
 package com.kampus.kbazaar.cart;
+import com.kampus.kbazaar.cartItem.CartItemRepository;
 import com.kampus.kbazaar.cartItem.CartItemService;
 import com.kampus.kbazaar.exceptions.NotFoundException;
 import com.kampus.kbazaar.cartItem.CartItem;
 
-import com.kampus.kbazaar.shopper.Shopper;
-
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 @Service
 public class CartService {
     private CartRepository cartRepository;
     private CartItemService cartItemService;
+    private CartItemRepository cartItemRepository;
 
-    public CartService(CartRepository cartRepository, CartItemService cartItemService) {
+    public CartService(CartRepository cartRepository, CartItemService cartItemService, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
+        this.cartItemRepository=cartItemRepository;
     }
 
     public List<CartResponse> getAll(){
@@ -49,7 +49,7 @@ public class CartService {
         Cart cart = cartRepository.findByUsername(username);
         CartItem item = new CartItem();
         //item.setId(shopper.getId());
-        item.setUsername(username));
+        item.setUsername(username);
         item.setSku(request.sku());
         item.setName(request.name());
         item.setPrice(request.price());
@@ -71,4 +71,6 @@ public class CartService {
         cart.setSubtotal(cart.getSubtotal().add(item.getPrice()));
         cartRepository.save(cart);
         return cart.toResponse(listItem);
+    }
 }
+
