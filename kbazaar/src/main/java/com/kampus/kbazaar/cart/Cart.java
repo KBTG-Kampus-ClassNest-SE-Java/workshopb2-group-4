@@ -30,7 +30,7 @@ public class Cart {
     private String promotionCodes;
 
     @Description("precisely reflect its pre-discount status")
-    @Column(name = "subtotal")
+    @Column(name = "sub_total")
     private BigDecimal subtotal;
 
     @Description("the final, all-inclusive amount to be paid.")

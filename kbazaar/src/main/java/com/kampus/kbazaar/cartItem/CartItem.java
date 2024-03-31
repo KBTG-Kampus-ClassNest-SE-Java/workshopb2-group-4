@@ -1,12 +1,10 @@
 package com.kampus.kbazaar.cartItem;
 
 import jakarta.persistence.*;
-import jdk.jfr.Description;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor

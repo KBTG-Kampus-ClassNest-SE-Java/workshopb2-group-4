@@ -40,6 +40,12 @@ public class CartControllerTest {
     @Test
     public void getCart_ReturnsOk() throws Exception {
         mockMvc.perform(get("/api/v1/carts").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(status().isNotFound());
     }
+
+//    @Test
+//    public void get
+
+
 }

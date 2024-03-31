@@ -1,7 +1,6 @@
 package com.kampus.kbazaar.cart;
 
 import com.kampus.kbazaar.cartItem.CartItem;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -13,7 +12,13 @@ public class CartResponse {
     private BigDecimal subtotal;
     private BigDecimal grandTotal;
 
-    public CartResponse(String username, List<CartItem> items, BigDecimal discount, BigDecimal totalDiscount, BigDecimal subtotal, BigDecimal grandTotal) {
+    public CartResponse(
+            String username,
+            List<CartItem> items,
+            BigDecimal discount,
+            BigDecimal totalDiscount,
+            BigDecimal subtotal,
+            BigDecimal grandTotal) {
         this.username = username;
         this.items = items;
         this.discount = discount;
