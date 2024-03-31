@@ -38,8 +38,57 @@ public class CartControllerTest {
     }
 
     @Test
+    @DisplayName("should return cart")
     public void getCart_ReturnsOk() throws Exception {
         mockMvc.perform(get("/api/v1/carts").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("should return cart by username")
+    public void getCartByUsername_ReturnsOk() throws Exception {
+        // Given
+        String username = "username";
+        // When & Then
+        mockMvc.perform(get("/api/v1/carts/" + username).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("post promotion code to cart should return updated cart with discount")
+    public void updateDiscount_ReturnsOk() throws Exception {
+        // Given
+        String username = "username";
+        String promotionCode = "code";
+        String productSku = "sku";
+
+        // Create a JSON object for the request body
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("promotionCode", promotionCode);
+        requestBody.put("productSku", productSku);
+
+        // Mock the service layer
+        Cart updatedCart = new Cart();
+        updatedCart.setDiscount(new BigDecimal("10.00"));
+        when(cartService.applyPromotion(anyString(), anyString(), anyString())).thenReturn(updatedCart);
+
+        // When & Then
+        mockMvc.perform(
+                        post("/api/v1/carts/" + username + "/promotion")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(requestBody.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.discount").value("10.00"));
+
+        // Test without product SKU
+        requestBody.remove("productSku");
+        when(cartService.applyPromotion(anyString(), anyString(), isNull())).thenReturn(updatedCart);
+
+        mockMvc.perform(
+                        post("/api/v1/carts/" + username + "/promotion")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(requestBody.toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.discount").value("10.00"));
     }
 }
