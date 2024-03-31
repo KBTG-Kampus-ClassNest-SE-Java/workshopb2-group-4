@@ -63,12 +63,14 @@ public class ProductControllerTest {
         int page = 2;
         int limit = 1;
         // When & Then
-        when(productService.getAll(page,limit)).thenReturn(new ArrayList<>());
+        when(productService.getAll(page, limit)).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/api/v1/products?page=2&limit=1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(
+                        get("/api/v1/products?page=2&limit=1")
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(productService, times(1)).getAll(page,limit);
+        verify(productService, times(1)).getAll(page, limit);
     }
 
     @Test

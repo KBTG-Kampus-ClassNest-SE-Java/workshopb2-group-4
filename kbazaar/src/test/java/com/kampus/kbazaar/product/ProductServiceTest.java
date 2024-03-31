@@ -70,23 +70,18 @@ class ProductServiceTest {
                         new BigDecimal(12990.75),
                         100);
         Product product2 =
-                new Product(
-                        2L,
-                        "Coca-Cola",
-                        "BEV-COCA-COLA",
-                         new BigDecimal(20.75),
-                        150);
+                new Product(2L, "Coca-Cola", "BEV-COCA-COLA", new BigDecimal(20.75), 150);
         List<Product> productList = Arrays.asList(product1, product2);
 
         // Mock repository method
-        Pageable pageable = PageRequest.of(1,1);
-        Page<Product> expectedProduct = new PageImpl<>(List.of(product2),pageable,1);
+        Pageable pageable = PageRequest.of(1, 1);
+        Page<Product> expectedProduct = new PageImpl<>(List.of(product2), pageable, 1);
         when(productRepository.findAll(pageable)).thenReturn(expectedProduct);
 
         // Call service method
         int page = 2;
         int limit = 1;
-        List<ProductResponse> result = productService.getAll(page,limit);
+        List<ProductResponse> result = productService.getAll(page, limit);
 
         // Assertions
         assertEquals(1, result.size());
