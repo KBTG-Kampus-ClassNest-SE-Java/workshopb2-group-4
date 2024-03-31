@@ -20,4 +20,9 @@ public class CartController {
     public ResponseEntity<List<CartResponse>> getCart() {
         return new ResponseEntity<>(cartService.getAll(), HttpStatus.OK);
     }
+
+    @PostMapping("/carts/{username}/items")
+    public CartReponse addToCart(@PathVariable String username,@RequestBody CartRequest request) {
+        return null;
+    }
 }
