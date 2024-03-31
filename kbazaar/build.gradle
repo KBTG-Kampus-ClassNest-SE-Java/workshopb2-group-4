@@ -15,17 +15,6 @@ jacocoTestReport {
     }
 }
 
-spotless {
-    java {
-        importOrder()
-        removeUnusedImports()
-        googleJavaFormat().aosp()
-        trimTrailingWhitespace()
-        formatAnnotations()
-        endWithNewline()
-    }
-}
-
 group = 'com.kampus'
 version = '0.0.1-SNAPSHOT'
 
