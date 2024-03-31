@@ -3,6 +3,7 @@ package com.kampus.kbazaar.cart;
 import com.kampus.kbazaar.cartItem.CartItem;
 import com.kampus.kbazaar.cartItem.CartItemService;
 import com.kampus.kbazaar.exceptions.NotFoundException;
+import com.kampus.kbazaar.promotion.PromotionRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

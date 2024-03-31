@@ -22,7 +22,6 @@ public class CartController {
         return new ResponseEntity<>(cartService.getAll(), HttpStatus.OK);
     }
 
-    private CartService cartService;
 
     @PostMapping("/carts/{username}/promotions")
     public ResponseEntity<Cart> applyPromotionCode(
