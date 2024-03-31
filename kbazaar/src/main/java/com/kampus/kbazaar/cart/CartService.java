@@ -1,12 +1,10 @@
 package com.kampus.kbazaar.cart;
-
-import com.kampus.kbazaar.cartItem.CartItem;
 import com.kampus.kbazaar.cartItem.CartItemService;
 import com.kampus.kbazaar.exceptions.NotFoundException;
 import com.kampus.kbazaar.cartItem.CartItem;
+
 import com.kampus.kbazaar.shopper.Shopper;
-import com.kampus.kbazaar.shopper.ShopperRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -50,9 +48,8 @@ public class CartService {
     public CartItem addToCart(String username, CartRequest request){
         Cart cart = cartRepository.findByUsername(username);
         CartItem item = new CartItem();
-        Shopper shopper = shopperRepository.findByUsername(username);
         //item.setId(shopper.getId());
-        item.setUsername(shopper.getUsername());
+        item.setUsername(username));
         item.setSku(request.sku());
         item.setName(request.name());
         item.setPrice(request.price());
@@ -71,7 +68,7 @@ public class CartService {
 //        cart.setTotalDiscount(cart.getDiscount()+item.getDiscount());
 //        cart.setSubtotal(sumTotal);
 //        cart.setGrandTotal(sumTotal-cart.getTotalDiscount());
-        cart.setSubtotal(cart.getSubtotal()+item.getPrice());
+        cart.setSubtotal(cart.getSubtotal().add(item.getPrice()));
         cartRepository.save(cart);
         return cart.toResponse(listItem);
 }

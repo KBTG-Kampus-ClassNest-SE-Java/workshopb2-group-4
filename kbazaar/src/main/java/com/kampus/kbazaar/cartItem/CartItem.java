@@ -1,10 +1,12 @@
 package com.kampus.kbazaar.cartItem;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import jdk.jfr.Description;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +31,7 @@ public class CartItem {
     private BigDecimal price;
 
     @Column(name = "quantity")
-    private BigDecimal quantity;
+    private Integer quantity;
 
     @Column(name = "discount")
     private BigDecimal discount;
@@ -77,11 +79,11 @@ public class CartItem {
         this.price = price;
     }
 
-    public BigDecimal getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
