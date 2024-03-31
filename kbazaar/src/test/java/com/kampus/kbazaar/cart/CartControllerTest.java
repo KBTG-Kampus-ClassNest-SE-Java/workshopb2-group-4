@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
@@ -29,6 +30,8 @@ public class CartControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
+    @MockBean
+    private CartService cartService;
     @InjectMocks private CartController cartController;
 
     @BeforeEach
@@ -40,12 +43,8 @@ public class CartControllerTest {
     @Test
     public void getCart_ReturnsOk() throws Exception {
         mockMvc.perform(get("/api/v1/carts").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
     }
-
-//    @Test
-//    public void get
 
 
 }
