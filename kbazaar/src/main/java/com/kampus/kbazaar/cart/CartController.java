@@ -17,9 +17,7 @@ public class CartController {
     }
 
     @GetMapping("/carts")
-    public ResponseEntity<List<CartResponse>> getCart() { // NOSONAR
-//        return ResponseEntity.ok().build();
-
+    public ResponseEntity<List<CartResponse>> getCart() {
         return new ResponseEntity<>(cartService.getAll(), HttpStatus.OK);
     }
 }

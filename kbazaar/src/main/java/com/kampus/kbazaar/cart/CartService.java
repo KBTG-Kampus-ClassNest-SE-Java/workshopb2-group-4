@@ -24,16 +24,9 @@ public class CartService {
         if(carts.isEmpty()){
             throw new NotFoundException("Cart not found");
         }
-
-//        CartResponse cartResponse = new CartResponse();
-        List<CartResponse> cartResponseList = new ArrayList<CartResponse>();
+        List<CartResponse> cartResponseList = new ArrayList<>();
         for (Cart cart: carts){
             List<CartItem> cartItems = cartItemService.findByUsername(cart.getUsername());
-            //Calculate for each username
-//            BigDecimal discount = 0;
-//            for (CartItem cartItem: cartItems){
-//
-//            }
             CartResponse cartResponse = new CartResponse(
                     cart.getUsername(),
                     cartItems,
