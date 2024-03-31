@@ -14,7 +14,11 @@ public class CartResponse {
     private BigDecimal grandTotal;
     private String promotionCodes;
 
-    public CartResponse(String username, List<CartItem> items, BigDecimal discount, BigDecimal totalDiscount, BigDecimal subtotal, BigDecimal grandTotal,String promotionCodes) {
+    private BigDecimal shippingFee;
+
+
+    public CartResponse(String username, List<CartItem> items, BigDecimal discount, BigDecimal totalDiscount, BigDecimal subtotal, BigDecimal grandTotal, String promotionCodes ,
+                        BigDecimal shippingFee) {
         this.username = username;
         this.items = items;
         this.discount = discount;
@@ -22,17 +26,8 @@ public class CartResponse {
         this.subtotal = subtotal;
         this.grandTotal = grandTotal;
         this.promotionCodes = promotionCodes;
+        this.shippingFee = shippingFee;
     }
-
-//    public CartResponse(Cart cart,List<CartItem> listItem) {
-//        this.username= cart.getUsername();
-//        this.items = listItem;
-//        this.discount = cart.getDiscount();
-//        this.totalDiscount = cart.getTotalDiscount();
-//        this.subtotal = cart.getSubtotal();
-//        this.grandTotal = cart.getGrandTotal();
-//        this.promotionCodes = cart.getPromotionCodes();
-//    }
 
     public String getPromotionCodes() {
         return promotionCodes;
@@ -73,5 +68,9 @@ public class CartResponse {
 
     public BigDecimal getGrandTotal() {
         return grandTotal;
+    }
+
+    public BigDecimal getShippingFee() {
+        return shippingFee;
     }
 }

@@ -3,10 +3,11 @@ import com.kampus.kbazaar.cartItem.CartItemRepository;
 import com.kampus.kbazaar.cartItem.CartItemService;
 import com.kampus.kbazaar.exceptions.NotFoundException;
 import com.kampus.kbazaar.cartItem.CartItem;
-
+import org.springframework.beans.factory.annotation.Value;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,6 +18,9 @@ public class CartService {
     private CartRepository cartRepository;
     private CartItemService cartItemService;
     private CartItemRepository cartItemRepository;
+
+    @Value("${enabled.shipping.fee}")
+    private String enableShippingFee;
 
     public CartService(CartRepository cartRepository, CartItemService cartItemService, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
@@ -70,7 +74,13 @@ public class CartService {
 //        cart.setTotalDiscount(cart.getDiscount()+item.getDiscount());
 //        cart.setSubtotal(sumTotal);
 //        cart.setGrandTotal(sumTotal-cart.getTotalDiscount());
+        if (enableShippingFee.equals("true")){
+            cart.setShippingFee(BigDecimal.valueOf(25.0));
+        } else {
+            cart.setShippingFee(BigDecimal.valueOf(0));
+        }
         cart.setSubtotal(cart.getSubtotal().add(item.getPrice()));
+        cart.setGrandTotal(cart.getSubtotal().add(cart.getShippingFee()));
         cartRepository.save(cart);
         return cart.toResponse(listItem);
     }

@@ -40,8 +40,11 @@ public class Cart {
     @Column(name = "grand_total")
     private BigDecimal grandTotal;
 
+    @Column(name = "shipping_fee")
+    private BigDecimal shippingFee;
+
     public String tryPush;
 
     public CartResponse toResponse(List<CartItem> listItem){
-        return new CartResponse(this.username, listItem,this.discount,this.totalDiscount, this.subtotal, this.grandTotal,this.promotionCodes);}
+        return new CartResponse(this.username, listItem,this.discount,this.totalDiscount, this.subtotal, this.grandTotal,this.promotionCodes,this.shippingFee);}
 }

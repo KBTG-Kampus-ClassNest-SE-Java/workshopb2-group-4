@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS cart (
 	total_discount INT NOT NULL,
 	promotion_codes VARCHAR(255),
 	sub_total DECIMAL(10, 2) NOT NULL ,
-	grand_total DECIMAL(10, 2) NOT NULL
+	grand_total DECIMAL(10, 2) NOT NULL,
+    shipping_fee DECIMAL(10,2)
 );
