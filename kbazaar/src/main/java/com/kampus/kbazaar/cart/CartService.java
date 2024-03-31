@@ -20,12 +20,12 @@ public class CartService {
     public CartService(CartRepository cartRepository, CartItemService cartItemService, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
-        this.cartItemRepository=cartItemRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
-    public List<CartResponse> getAll(){
+    public List<CartResponse> getAll() {
         List<Cart> carts = cartRepository.findAll();
-        if(carts.isEmpty()){
+        if (carts.isEmpty()) {
             throw new NotFoundException("Cart not found");
         }
         List<CartResponse> cartResponseList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CartService {
         return cartResponseList;
     }
 
-    public CartItem addToCart(String username, CartRequest request){
+    public CartResponse addToCart(String username, CartRequest request) {
         Cart cart = cartRepository.findByUsername(username);
         CartItem item = new CartItem();
         //item.setId(shopper.getId());
