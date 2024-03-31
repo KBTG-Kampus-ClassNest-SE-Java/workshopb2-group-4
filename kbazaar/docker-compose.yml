@@ -4,6 +4,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_DB: workshop
+    volumes:
+      - ./src/main/resources/sql/data:/docker-entrypoint-initdb.d/data
+      - ./src/main/resources/sql/schema:/docker-entrypoint-initdb.d/schema
     ports:
-      - '5432:5432'
+      - "5432:5432"
