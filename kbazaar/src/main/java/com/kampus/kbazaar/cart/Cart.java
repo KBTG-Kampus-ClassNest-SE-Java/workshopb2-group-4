@@ -64,5 +64,4 @@ public class Cart {
         this.grandTotal = grandTotal;
     }
 
-    public String tryPush;
 }
